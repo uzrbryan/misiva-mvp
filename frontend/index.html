@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misiva</title>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Misiva</div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#process">Proceso</a></li>
+                <li><a href="#impact">Impacto</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>Convierte tus residuos en recompensas</h1>
+                <p>Trae tus materiales reciclables y gana tokens al instante. Intercambia tus tokens por valiosas recompensas y ayuda a construir un futuro sostenible.</p>
+                
+                <div class="exchange-icon">
+                    <div class="token-animation"></div>
+                </div>
+                
+                <button class="cta-button" onclick="showAuthModal()">Comienza Ahora</button>
+            </div>
+        </section>
+
+        <section class="process" id="process">
+            <div class="container">
+                <h2>Cómo Misiva funciona</h2>
+                <div class="process-grid">
+                    <div class="process-card">
+                        <div class="process-icon">📍</div>
+                        <h3>Visita puntos de canje</h3>
+                        <p>Encontrá el punto de canje mas cercano a tu ubicacion y trae tus materiales reciclables a nuestro personal capacitado.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="process-icon">⚖️</div>
+                        <h3>Evaluación de Materiales</h3>
+                        <p>Nuestro personal clasificará, pesará y evaluará sus materiales reciclables mediante nuestro avanzado sistema de clasificación.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="process-icon">🪙</div>
+                        <h3>Ganar Tokens</h3>
+                        <p>Recibe tokens digitales al instante según el tipo y la cantidad de materiales que hayas traído para intercambiar.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="process-icon">🎁</div>
+                        <h3>Canjea recompensas</h3>
+                        <p>Usa tus tokens para obtener recompensas, descuentos o incluso reembolsos en efectivo de nuestra red de socios.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard" id="impact">
+            <div class="container">
+                <h2>Panel de impacto comunitario</h2>
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <h3>12,847</h3>
+                        <p>Usuarios Registrados</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>1.8M</h3>
+                        <p>Toneladas recicladas</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Plastico</h3>
+                        <p>Material mas reciclado</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>2.4M</h3>
+                        <p>Tokens distribuidos</p>
+                    </div>
+                </div>
+                
+                <div class="leaderboard">
+                    <h3>🏆 Top Recicladores del Mes</h3>
+                    <div class="leader-item">
+                        <div class="leader-rank">1</div>
+                        <div class="leader-name">EcoWarrior_Sarah</div>
+                        <div class="leader-tokens">2,450 tokens</div>
+                    </div>
+                    <div class="leader-item">
+                        <div class="leader-rank">2</div>
+                        <div class="leader-name">GreenMike92</div>
+                        <div class="leader-tokens">2,180 tokens</div>
+                    </div>
+                    <div class="leader-item">
+                        <div class="leader-rank">3</div>
+                        <div class="leader-name">RecycleQueen</div>
+                        <div class="leader-tokens">1,950 tokens</div>
+                    </div>
+                    <div class="leader-item">
+                        <div class="leader-rank">4</div>
+                        <div class="leader-name">EarthLover_Alex</div>
+                        <div class="leader-tokens">1,720 tokens</div>
+                    </div>
+                    <div class="leader-item">
+                        <div class="leader-rank">5</div>
+                        <div class="leader-name">CleanCity_Tom</div>
+                        <div class="leader-tokens">1,650 tokens</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2>Contactanos</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Informacion de contacto</h3>
+                        <p><strong>📧 Email:</strong> hello@recyclexchange.com</p>
+                        <p><strong>📞 Phone:</strong> +1 (555) 123-4567</p>
+                        <p><strong>📍 Address:</strong> 123 Green Street, Eco City, EC 12345</p>
+                        <p><strong>🕒 Hours:</strong> Mon-Fri 8AM-6PM, Sat 9AM-4PM</p>
+                        
+                        <h3 style="margin-top: 2rem;">Find Exchange Points</h3>
+                        <p>Use our mobile app to locate the nearest RecycleXchange point in your area. Available 24/7 for your convenience.</p>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3>Mandanos un mensaje</h3>
+                        <form onsubmit="handleContactForm(event)">
+                            <div class="form-group">
+                                <label for="name">Nombre Completo</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Razon</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Mensaje</label>
+                                <textarea id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="cta-button">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section" id="join">
+            <div class="container">
+                <h2>Queres hacer la diferencia?</h2>
+                <p>Unite a miles de ciudadanos creando un futuro sustentable a traves de un sistema de reciclaje basado en token.</p>
+                <div class="button-group">
+                    <button class="cta-button" onclick="showAuthModal()">Unite Hoy</button>
+                    <a href="#process" class="secondary-button">Saber Mas</a>
+                </div>
+                
+                <div id="alert-container"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Misiva. Transformando desechos en recompensas por su manana sustentable.</p>
+        </div>
+    </footer>
+
+<!-- POAP Card -->
+<div id="poap-overlay">
+  <div class="poap-card">
+    <div class="poap-icon">🪙</div>
+    <h3>¡Felicidades!</h3>
+    <p>Recibiste un NFT POAP por tu contribución al reciclaje.</p>
+    <p class="poap-id">Token ID: #002451</p>
+  </div>
+</div>
+
+<!-- jS Interaction -->
+<script>
+    const poapOverlay = document.getElementById("poap-overlay");
+
+// Mostrar la POAP Card al hacer clic en "Comienza Hoy"
+function showPoapCard() {
+  poapOverlay.classList.add("active");
+}
+
+// Escuchamos el clic en el botón sin romper su onclick actual
+document.querySelector(".cta-button").addEventListener("click", showPoapCard);
+
+// Cerrar la card al hacer clic fuera
+poapOverlay.addEventListener("click", (e) => {
+  if (e.target === poapOverlay) {
+    poapOverlay.classList.remove("active");
+  }
+});
+
+</script>

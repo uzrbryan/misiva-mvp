@@ -1,0 +1,353 @@
+// =============================================
+// 🎨 MISIVA MVP - CUSTOM BOOTSTRAP CONFIGURATION
+// =============================================
+
+// 1️⃣ COLOR PALETTE (matching landing page)
+$primary:    #40534C;  // Dark green - main brand color (buttons, links)
+$secondary:  #F1BB25;  // Golden yellow - secondary brand color
+$success:    #4CAF50;  // Green - success messages, alerts
+$danger:     #B7410E;  // Orange-red - error messages, alerts
+$warning:    #F1BB25;  // Same as secondary - warning messages
+$info:       #40534C;  // Same as primary - info messages
+$light:      #F0EDE5;  // Cream - light backgrounds, cards
+$dark:       #363537;  // Dark gray - dark backgrounds
+
+// 2️⃣ BODY & TYPOGRAPHY
+$body-bg:              #363537; // Dark background
+$body-color:           #F0EDE5; // Light cream text
+$border-radius: 0.5rem;           // Slightly rounded corners
+$font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$headings-color:       $secondary;
+
+// 3️⃣ LINKS
+$link-color:           $secondary;
+$link-hover-color:     darken($secondary, 10%);
+$link-decoration:      none;
+
+// 4️⃣ BUTTONS
+$btn-border-radius:    50px;  // Rounded buttons (like landing)
+$btn-padding-y:        0.75rem;
+$btn-padding-x:        1.5rem;
+$btn-font-weight:      600;
+
+// 5️⃣ CARDS & CONTAINERS
+$border-radius:        15px;
+$border-radius-sm:     10px;
+$border-radius-lg:     20px;
+$card-bg:              $primary;
+$card-border-width:    0;
+$card-box-shadow:      0 2px 8px rgba(0, 0, 0, 0.3);
+
+// 6️⃣ FORMS
+$input-bg:             $dark;
+$input-color:          $light;
+$input-border-color:   $primary;
+$input-focus-border-color: $secondary;
+$input-placeholder-color: rgba($light, 0.5);
+
+// 7️⃣ TABLES
+$table-bg:             $primary;
+$table-striped-bg:     rgba($dark, 0.3);
+$table-hover-bg:       rgba($secondary, 0.1);
+$table-border-color:   rgba($light, 0.1);
+
+// 8️⃣ MODALS (por si las usás después)
+$modal-content-bg:              $primary;
+$modal-content-border-color:    transparent;
+$modal-backdrop-bg:             $dark;
+$modal-backdrop-opacity:        0.8;
+
+// 9️⃣ NAVBAR
+$navbar-dark-color:             $light;
+$navbar-dark-hover-color:       $secondary;
+$navbar-dark-active-color:      $secondary;
+$navbar-dark-brand-color:       $secondary;
+
+// 🔟 ALERTS
+$alert-border-radius:           $border-radius-sm;
+
+// =============================================
+// 📦 IMPORT BOOTSTRAP (solo lo necesario)
+// =============================================
+
+// Required (obligatorios)
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/variables-dark";
+@import "../../../node_modules/bootstrap/scss/maps";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/root";
+
+// Layout & components
+@import "../../../node_modules/bootstrap/scss/reboot";
+@import "../../../node_modules/bootstrap/scss/type";
+@import "../../../node_modules/bootstrap/scss/images";
+@import "../../../node_modules/bootstrap/scss/containers";
+@import "../../../node_modules/bootstrap/scss/grid";
+@import "../../../node_modules/bootstrap/scss/tables";
+@import "../../../node_modules/bootstrap/scss/forms";
+@import "../../../node_modules/bootstrap/scss/buttons";
+@import "../../../node_modules/bootstrap/scss/transitions";
+@import "../../../node_modules/bootstrap/scss/dropdown";
+@import "../../../node_modules/bootstrap/scss/button-group";
+@import "../../../node_modules/bootstrap/scss/nav";
+@import "../../../node_modules/bootstrap/scss/navbar";
+@import "../../../node_modules/bootstrap/scss/card";
+@import "../../../node_modules/bootstrap/scss/accordion";
+@import "../../../node_modules/bootstrap/scss/badge";
+@import "../../../node_modules/bootstrap/scss/alert";
+@import "../../../node_modules/bootstrap/scss/progress";
+@import "../../../node_modules/bootstrap/scss/list-group";
+@import "../../../node_modules/bootstrap/scss/close";
+@import "../../../node_modules/bootstrap/scss/modal";
+@import "../../../node_modules/bootstrap/scss/tooltip";
+@import "../../../node_modules/bootstrap/scss/popover";
+
+// Helpers
+@import "../../../node_modules/bootstrap/scss/helpers";
+
+// Utilities
+@import "../../../node_modules/bootstrap/scss/utilities";
+@import "../../../node_modules/bootstrap/scss/utilities/api";
+
+// =============================================
+// 🎨 CUSTOM STYLES (tus estilos personalizados)
+// =============================================
+
+// Global adjustments
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Custom button hover effects
+.btn {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba($secondary, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Custom cards
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// Token balance card (special styling)
+.token-balance-card {
+  background: linear-gradient(135deg, $secondary, darken($secondary, 10%));
+  color: $dark;
+  border-radius: $border-radius-lg;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba($secondary, 0.3);
+  
+  .balance-amount {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// POAP Card styling (specific for MVP)
+.poap-card {
+  background-color: $primary;
+  border: 2px solid $secondary;
+  border-radius: $border-radius;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba($secondary, 0.3);
+  }
+  
+  .poap-image {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 3px solid $secondary;
+    margin-bottom: 1rem;
+  }
+  
+  .poap-title {
+    color: $secondary;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .poap-description {
+    color: $light;
+    font-size: 0.9rem;
+  }
+}
+
+// Stats cards
+.stat-card {
+  background-color: $primary;
+  border: 2px solid $secondary;
+  border-radius: $border-radius;
+  padding: 2rem;
+  text-align: center;
+  
+  h3 {
+    font-size: 2.5rem;
+    color: $secondary;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: $light;
+    margin: 0;
+  }
+}
+
+// Dashboard header
+.dashboard-header {
+  background-color: $primary;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: $secondary;
+  }
+}
+
+// Navigation tabs
+.nav-tabs {
+  border-bottom-color: rgba($light, 0.1);
+  
+  .nav-link {
+    color: $light;
+    border: none;
+    background-color: transparent;
+    
+    &:hover {
+      color: $secondary;
+      border-color: transparent;
+    }
+    
+    &.active {
+      color: $dark;
+      background-color: $secondary;
+      border-color: $secondary;
+    }
+  }
+}
+
+// Navbar link hover effect
+.navbar-nav .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $secondary !important;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: $secondary;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+
+    &:hover::after {
+        width: 80%;
+    }
+}
+
+// Navbar background on scroll
+.navbar.scrolled {
+    background-color: rgba($primary, 0.95) !important;
+    backdrop-filter: blur(10px);
+}
+
+// Forms styling
+.form-label {
+  color: $secondary;
+  font-weight: 500;
+}
+
+.form-control {
+  &:focus {
+    border-color: $secondary;
+    box-shadow: 0 0 0 0.25rem rgba($secondary, 0.25);
+  }
+}
+
+// Table hover effect
+.table {
+  color: $light;
+  
+  thead {
+    background-color: darken($primary, 5%);
+  }
+  
+  tbody tr {
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: rgba($secondary, 0.1);
+    }
+  }
+}
+
+// Alert customization
+.alert {
+  border: none;
+  font-weight: 500;
+}
+
+// Footer
+footer {
+  background-color: $dark;
+  color: rgba($light, 0.7);
+  padding: 2rem 0;
+  margin-top: auto;
+  border-top: 1px solid $primary;
+}
+
+// Utility: Gradient text
+.text-gradient {
+  background: linear-gradient(135deg, $secondary, darken($secondary, 15%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Animation: Fade in
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}

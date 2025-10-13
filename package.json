@@ -1,0 +1,22 @@
+{
+  "name": "misiva-mvp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "sass frontend/assets/scss/main.scss frontend/css/main.css && postcss frontend/css/main.css --use autoprefixer -o frontend/css/main.css",
+    "watch-css": "sass --watch frontend/assets/scss/main.scss:frontend/css/main.css",
+    "build": "npm run build-css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "bootstrap": "^5.3.8",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "sass": "^1.93.2"
+  }
+}

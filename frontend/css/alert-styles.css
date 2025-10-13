@@ -1,0 +1,17 @@
+/* Alert Styles */
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: #4CAF50;
+    color: #F0EDE5;
+}
+
+.alert-error {
+    background-color: #B7410E;
+    color: #F0EDE5;
+}
