@@ -1,5 +1,6 @@
-require("@nomicfoundation/hardhat-toolbox");
-require("dotenv").config();
+import "@nomicfoundation/hardhat-toolbox";
+import { config } from "dotenv";
+config();
 
 const { PRIVATE_KEY, ALCHEMY_AMOY_URL, ALCHEMY_POLYGON_URL } = process.env;
 
@@ -13,7 +14,7 @@ if (!ALCHEMY_AMOY_URL) {
 }
 
 /** @type import('hardhat/config').HardhatUserConfig */
-module.exports = {
+export default {
   solidity: {
     version: "0.8.21",
     settings: {
