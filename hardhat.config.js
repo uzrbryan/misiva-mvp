@@ -1,20 +1,10 @@
-import "@nomicfoundation/hardhat-toolbox";
-import { config } from "dotenv";
-config();
+require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
 
 const { PRIVATE_KEY, ALCHEMY_AMOY_URL, ALCHEMY_POLYGON_URL } = process.env;
 
-// Validación de variables críticas
-if (!PRIVATE_KEY) {
-  console.warn("⚠️  WARNING: PRIVATE_KEY not found in .env file");
-}
-
-if (!ALCHEMY_AMOY_URL) {
-  console.warn("⚠️  WARNING: ALCHEMY_AMOY_URL not found in .env file");
-}
-
 /** @type import('hardhat/config').HardhatUserConfig */
-export default {
+module.exports = {
   solidity: {
     version: "0.8.21",
     settings: {
@@ -48,12 +38,5 @@ export default {
     tests: "./test",
     cache: "./cache",
     artifacts: "./artifacts",
-  },
-  // Configuración de Etherscan para verificar contratos (opcional)
-  etherscan: {
-    apiKey: {
-      polygonAmoy: process.env.POLYGONSCAN_API_KEY || "",
-      polygon: process.env.POLYGONSCAN_API_KEY || "",
-    },
   },
 };
