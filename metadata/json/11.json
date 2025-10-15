@@ -1,0 +1,23 @@
+{
+  "name": "POAP Misiva #11",
+  "description": "Reclamado el 21/10/2025 - Prueba de participacion de reciclaje",
+  "image": "ipfs://bafybeigp3ysvkuprw4sc3o2cpkqv466rsjduuw434kkmram67e4omurzh4/poap.png",
+  "attributes": [
+    {
+      "trait_type": "Token ID",
+      "value": "11"
+    },
+    {
+      "trait_type": "Fecha",
+      "value": "2025-10-21"
+    },
+    {
+      "trait_type": "Mes",
+      "value": "Octubre"
+    },
+    {
+      "trait_type": "Coleccion",
+      "value": "Misiva Genesis"
+    }
+  ]
+}

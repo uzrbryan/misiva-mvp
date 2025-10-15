@@ -13,8 +13,8 @@ async function main() {
   const SYMBOL = "EPOAP";
   
   // Metadata URI base (IPFS)
-  // 👇 Por ahora usamos un placeholder, lo actualizás después con Pinata
-  const BASE_TOKEN_URI = "ipfs://QmPlaceholder/";
+  // 👇 CID corregido de Pinata (con imagen arreglada)
+  const BASE_TOKEN_URI = "ipfs://bafybeia33b6grqnicl2cg2xstgxhb4wyzntmrklxllbu5g6naw3nyio4xa/json/";
   
   // Max supply (0 = ilimitado)
   const MAX_SUPPLY = 0; // Sin límite para el MVP
