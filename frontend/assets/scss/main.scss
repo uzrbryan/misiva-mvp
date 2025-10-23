@@ -240,12 +240,17 @@ nav {
   background: linear-gradient(45deg, #40534C, #363537);
 
   &::before {
-    content: '🪙';
+    content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 3rem;
+    width: 150px;
+    height: 150px;
+    background-image: url('../img/misiva6.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
 
@@ -515,12 +520,164 @@ footer {
   }
 }
 
-// ========== POAP CARD ==========
+//* Botón de reclamar POAP *//
+.claim-button {
+  background-color: #F1BB25;
+  color: #363537;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background-color: #d4a01f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(241, 187, 37, 0.3);
+  }
+
+  &:disabled {
+    background-color: #40534C;
+    color: #F0EDE5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+  }
+}
+
+// ========== MODAL DE MINT (NUEVO) ==========
+#mint-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.active {
+    display: flex;
+    opacity: 1;
+  }
+}
+
+.mint-modal-content {
+  background: linear-gradient(135deg, #40534C, #363537);
+  border: 2px solid #F1BB25;
+  border-radius: 20px;
+  color: #F0EDE5;
+  width: 90%;
+  max-width: 450px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: modalSlideIn 0.3s ease-out;
+
+  h2 {
+    color: #F1BB25;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+  }
+
+  p {
+    color: #F0EDE5;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    text-align: left;
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      color: #F1BB25;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #363537;
+      border-radius: 8px;
+      background-color: #363537;
+      color: #F0EDE5;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+        border-color: #F1BB25;
+      }
+
+      &::placeholder {
+        color: rgba(#F0EDE5, 0.5);
+      }
+    }
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// ========== ERROR & LOADING (NUEVO) ==========
+.mint-error {
+  background-color: #B7410E;
+  color: #F0EDE5;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.mint-loading {
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  p {
+    color: #F0EDE5;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+.mint-spinner {
+  border: 4px solid rgba(241, 187, 37, 0.2);
+  border-top: 4px solid #F1BB25;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// ========== POAP CARD (ACTUALIZADA) ==========
 #poap-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
   z-index: 9999;
@@ -538,39 +695,67 @@ footer {
   border: 2px solid #F1BB25;
   border-radius: 20px;
   color: #F0EDE5;
-  width: 300px;
-  padding: 1.5rem;
+  width: 90%;
+  max-width: 400px;
+  padding: 2rem;
   text-align: center;
-  margin: 2rem auto;
-  box-shadow: 0 5px 15px rgba(241, 187, 37, 0.3);
-  animation: fadeIn 0.8s ease-in-out;
+  box-shadow: 0 10px 30px rgba(241, 187, 37, 0.3);
+  animation: poapFadeIn 0.5s ease-out;
 }
 
 .poap-icon {
-  font-size: 3rem;
+  font-size: 4rem;
   margin-bottom: 1rem;
-  animation: pulse 1s ease-in-out;
+  animation: poapPulse 2s ease-in-out infinite;
 }
 
 .poap-card h3 {
-  margin-bottom: 10px;
   color: #F1BB25;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
 .poap-card p {
-  margin: 0;
   color: #F0EDE5;
+  margin-bottom: 0.5rem;
   font-size: 0.95rem;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
+.poap-details {
+  background-color: rgba(54, 53, 55, 0.5);
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1.5rem 0;
+  text-align: left;
+
+  p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+  }
+
+  strong {
+    color: #F1BB25;
+  }
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+@keyframes poapFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes poapPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 // ========== ALERTS ==========
@@ -619,6 +804,16 @@ footer {
   .contact-grid {
     grid-template-columns: 1fr;
   }
+
+  .mint-modal-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .poap-card {
+    width: 95%;
+    padding: 1.5rem;
+  }
 }
 
 // ========== UTILITY CLASSES ==========
@@ -631,4 +826,9 @@ footer {
 
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
 }

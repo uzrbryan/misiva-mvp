@@ -29,7 +29,7 @@
                     <div class="token-animation"></div>
                 </div>
                 
-                <button class="cta-button" onclick="showAuthModal()">Comienza Ahora</button>
+                <button class="cta-button">Comienza Ahora</button>
             </div>
         </section>
 
@@ -48,7 +48,7 @@
                         <p>Nuestro personal clasificará, pesará y evaluará sus materiales reciclables mediante nuestro avanzado sistema de clasificación.</p>
                     </div>
                     <div class="process-card">
-                        <div class="process-icon">🪙</div>
+                        <div class="process-icon"><img src="img/misiva6.png" alt="Token Icon" width="80" height="80"></div>
                         <h3>Ganar Tokens</h3>
                         <p>Recibe tokens digitales al instante según el tipo y la cantidad de materiales que hayas traído para intercambiar.</p>
                     </div>
@@ -160,7 +160,7 @@
                 <h2>Queres hacer la diferencia?</h2>
                 <p>Unite a miles de ciudadanos creando un futuro sustentable a traves de un sistema de reciclaje basado en token.</p>
                 <div class="button-group">
-                    <button class="cta-button" onclick="showAuthModal()">Unite Hoy</button>
+                    <button class="cta-button">Unite Hoy</button>
                     <a href="#process" class="secondary-button">Saber Mas</a>
                 </div>
                 
@@ -175,33 +175,207 @@
         </div>
     </footer>
 
-<!-- POAP Card -->
-<div id="poap-overlay">
-  <div class="poap-card">
-    <div class="poap-icon">🪙</div>
-    <h3>¡Felicidades!</h3>
-    <p>Recibiste un NFT POAP por tu contribución al reciclaje.</p>
-    <p class="poap-id">Token ID: #002451</p>
-  </div>
-</div>
+    <!-- ========== MODAL DE MINT ========== -->
+    <div id="mint-modal">
+      <div class="mint-modal-content">
+        <h2>Reclamar tu POAP</h2>
+        <p>Ingresá tu nombre para recibir tu prueba de participación en el reciclaje</p>
+        
+        <div class="form-group">
+          <label for="user-name-input">Tu nombre</label>
+          <input 
+            type="text" 
+            id="user-name-input" 
+            placeholder="Ej: Nombre Apellido"
+            maxlength="100"
+          >
+        </div>
+        
+        <div id="mint-error" class="mint-error" style="display: none;"></div>
+        
+        <div id="mint-loading" class="mint-loading" style="display: none;">
+          <div class="mint-spinner"></div>
+          <p>Minteando tu POAP...</p>
+        </div>
+        
+        <button id="claim-poap-button" class="claim-button">Reclamar POAP</button>
+      </div>
+    </div>
 
-<!-- jS Interaction -->
-<script>
-    const poapOverlay = document.getElementById("poap-overlay");
+    <!-- ========== POAP CARD ========== -->
+    <div id="poap-overlay">
+      <div class="poap-card">
+        <div class="poap-icon"><img src="img/misiva6.png" alt="POAP Token" width="150" height="150"></div>
+        <h3>¡Felicidades <span id="poap-user-name">Usuario</span>!</h3>
+        <p>Recibiste un NFT POAP por tu contribución al reciclaje</p>
+        <div class="poap-details">
+          <p><strong>Wallet:</strong> <span id="poap-wallet-address">0x...</span></p>
+          <p><strong>Token ID:</strong> <span id="poap-token-id">#1</span></p>
+          <p><strong>Fecha:</strong> <span id="poap-date">21/10/2025</span></p>
+        </div>
+      </div>
+    </div>
 
-// Mostrar la POAP Card al hacer clic en "Comienza Hoy"
-function showPoapCard() {
-  poapOverlay.classList.add("active");
-}
+    <!-- ========== SCRIPTS ========== -->
+    <script type="module">
+      import { mintPOAP } from './js/mint.js';
 
-// Escuchamos el clic en el botón sin romper su onclick actual
-document.querySelector(".cta-button").addEventListener("click", showPoapCard);
+      // ========== ELEMENTOS DEL DOM ==========
+      const mintModal = document.getElementById('mint-modal');
+      const poapOverlay = document.getElementById('poap-overlay');
+      const userNameInput = document.getElementById('user-name-input');
+      const claimButton = document.getElementById('claim-poap-button');
+      const loadingDiv = document.getElementById('mint-loading');
+      const errorDiv = document.getElementById('mint-error');
 
-// Cerrar la card al hacer clic fuera
-poapOverlay.addEventListener("click", (e) => {
-  if (e.target === poapOverlay) {
-    poapOverlay.classList.remove("active");
-  }
-});
+      // POAP Card elementos
+      const poapUserName = document.getElementById('poap-user-name');
+      const poapWalletAddress = document.getElementById('poap-wallet-address');
+      const poapTokenId = document.getElementById('poap-token-id');
+      const poapDate = document.getElementById('poap-date');
 
-</script>
+      // ========== ABRIR MODAL DE MINT ==========
+      function showAuthModal() {
+        mintModal.classList.add('active');
+        userNameInput.value = '';
+        setTimeout(() => userNameInput.focus(), 300);
+        hideError();
+      }
+
+      // ========== CERRAR MODALES ==========
+      function closeMintModal() {
+        mintModal.classList.remove('active');
+      }
+
+      function closePoapCard() {
+        poapOverlay.classList.remove('active');
+      }
+
+      // ========== MOSTRAR/OCULTAR LOADING ==========
+      function showLoading() {
+        loadingDiv.style.display = 'block';
+        claimButton.disabled = true;
+        claimButton.textContent = 'Minteando...';
+      }
+
+      function hideLoading() {
+        loadingDiv.style.display = 'none';
+        claimButton.disabled = false;
+        claimButton.textContent = 'Reclamar POAP';
+      }
+
+      // ========== MOSTRAR/OCULTAR ERROR ==========
+      function showError(message) {
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+      }
+
+      function hideError() {
+        errorDiv.style.display = 'none';
+      }
+
+      // ========== MOSTRAR POAP CARD ==========
+      function showPoapCard(data) {
+        // Actualizar datos
+        poapUserName.textContent = data.userName;
+        poapWalletAddress.textContent = data.walletAddressShort;
+        poapTokenId.textContent = `#${data.tokenId}`;
+        
+        // Formatear fecha
+        const date = new Date(data.timestamp);
+        poapDate.textContent = date.toLocaleDateString('es-AR');
+
+        // Cerrar modal y mostrar POAP card
+        closeMintModal();
+        poapOverlay.classList.add('active');
+      }
+
+      // ========== HANDLE CLAIM POAP ==========
+      async function handleClaimPoap() {
+        const userName = userNameInput.value.trim();
+
+        // AGREGÁ ESTO:
+        console.log('🔍 Debug userName:', userName);
+        console.log('🔍 userName length:', userName.length);
+        console.log('🔍 Condición !userName:', !userName);
+        console.log('🔍 Condición userName === "":', userName === "");
+
+        // Validar nombre
+        if (!userName) {
+          showError('Por favor ingresá tu nombre');
+          return;
+        }
+
+        if (userName.length < 2) {
+          showError('El nombre debe tener al menos 2 caracteres');
+          return;
+        }
+
+        if (userName.length > 100) {
+          showError('El nombre es demasiado largo (máximo 100 caracteres)');
+          return;
+        }
+
+        // Mostrar loading
+        showLoading();
+        hideError();
+
+        try {
+          // Llamar al mint
+          const result = await mintPOAP(userName);
+
+          if (!result.success) {
+            throw new Error(result.error);
+          }
+
+          // Mostrar POAP card
+          showPoapCard(result);
+
+        } catch (error) {
+          console.error('Error al reclamar POAP:', error);
+          showError(error.message || 'Error al reclamar POAP. Intentá de nuevo.');
+        } finally {
+          hideLoading();
+        }
+      }
+
+      // ========== EVENT LISTENERS ==========
+      
+      // Botones "Comienza Ahora"
+      const ctaButtons = document.querySelectorAll('.cta-button');
+      ctaButtons.forEach(button => {
+        button.addEventListener('click', showAuthModal);
+      });
+
+      // Botón "Reclamar POAP"
+      claimButton.addEventListener('click', handleClaimPoap);
+
+      // Enter en el input
+      userNameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          handleClaimPoap();
+        }
+      });
+
+      // Cerrar modal al hacer clic fuera
+      mintModal.addEventListener('click', (e) => {
+        if (e.target === mintModal) {
+          closeMintModal();
+        }
+      });
+
+      // Cerrar POAP card al hacer clic fuera
+      poapOverlay.addEventListener('click', (e) => {
+        if (e.target === poapOverlay) {
+          closePoapCard();
+        }
+      });
+
+      // Formulario de contacto
+      window.handleContactForm = function(event) {
+        event.preventDefault();
+        alert('Formulario enviado! (demo)');
+      };
+    </script>
+</body>
+</html>
