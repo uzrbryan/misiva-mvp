@@ -115,6 +115,10 @@ $alert-border-radius:           $border-radius-sm;
 // =============================================
 
 // ========== GLOBAL STYLES ==========
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   box-sizing: border-box;
   margin: 0;
