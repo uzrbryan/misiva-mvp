@@ -20,16 +20,17 @@
     </header>
 
     <main>
-        <section class="hero" id="home">
-            <div class="container">
+      <section class="hero" id="home">
+            <div class="container" class="section-divider">
                 <h1>Convierte tus residuos en recompensas</h1>
                 <p>Trae tus materiales reciclables y gana tokens al instante. Intercambia tus tokens por valiosas recompensas y ayuda a construir un futuro sostenible.</p>
                 
                 <div class="exchange-icon">
-                    <div class="token-animation"></div>
+                  <div class="token-animation"></div>
                 </div>
                 
-                <button class="cta-button">Comienza Ahora</button>
+                <p class="cta-text">Comienza Ahora</p>
+                <!--<button class="cta-button">Comienza Ahora</button>-->
             </div>
         </section>
 
@@ -48,7 +49,7 @@
                         <p>Nuestro personal clasificará, pesará y evaluará sus materiales reciclables mediante nuestro avanzado sistema de clasificación.</p>
                     </div>
                     <div class="process-card">
-                        <div class="process-icon"><img src="img/misiva6.png" alt="Token Icon" width="80" height="80"></div>
+                        <div class="process-icon"><img src="img/mpoap.svg" alt="Token Icon" width="85" height="85"></div>
                         <h3>Ganar Tokens</h3>
                         <p>Recibe tokens digitales al instante según el tipo y la cantidad de materiales que hayas traído para intercambiar.</p>
                     </div>
@@ -205,7 +206,7 @@
     <!-- ========== POAP CARD ========== -->
     <div id="poap-overlay">
       <div class="poap-card">
-        <div class="poap-icon"><img src="img/misiva6.png" alt="POAP Token" width="150" height="150"></div>
+        <div class="poap-icon"><img src="img/mpoap.svg" alt="POAP Token" width="150" height="150"></div>
         <h3>¡Felicidades <span id="poap-user-name">Usuario</span>!</h3>
         <p>Recibiste un NFT POAP por tu contribución al reciclaje</p>
         <div class="poap-details">
@@ -342,10 +343,14 @@
       // ========== EVENT LISTENERS ==========
       
       // Botones "Comienza Ahora"
-      const ctaButtons = document.querySelectorAll('.cta-button');
-      ctaButtons.forEach(button => {
-        button.addEventListener('click', showAuthModal);
-      });
+      //const ctaButtons = document.querySelectorAll('.cta-button');
+      ///ctaButtons.forEach(button => {
+        //button.addEventListener('click', showAuthModal);
+      //});
+
+      // Logo clickeable
+      const tokenAnimation = document.querySelector('.token-animation');
+      tokenAnimation.addEventListener('click', showAuthModal);
 
       // Botón "Reclamar POAP"
       claimButton.addEventListener('click', handleClaimPoap);
@@ -376,6 +381,28 @@
         event.preventDefault();
         alert('Formulario enviado! (demo)');
       };
+
+      // Sonido del boton
+      const clickSound = document.getElementById('clickSound');
+
+      document.querySelector('.token-animation').addEventListener('click', () => {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(error => {
+          console.log('Error reproduciendo audio:', error);
+        });
+      });
     </script>
+
+    <audio id="clickSound" preload="auto">
+     <source src="sounds/sound.mp3" type="audio/mpeg">
+     <source src="sounds/sound.ogg" type="audio/ogg">
+    </audio>
+
+    
+    <div class="floating-particles" style="top: 15%; left: 10%;"></div>
+    <div class="floating-particles" style="top: 25%; left: 85%;"></div>
+    <div class="floating-particles" style="top: 45%; left: 15%;"></div>
+    <div class="floating-particles" style="top: 65%; left: 90%;"></div>
+
 </body>
 </html>
