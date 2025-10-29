@@ -107,7 +107,12 @@ router.post('/mint', async (req, res) => {
     }
 
     // ========== MINTEAR NFT ==========
-    
+    console.log('🔍 Estado actual del contrato:');
+    const currentNextId = await contract.nextTokenId();
+    const totalSupply = await contract.totalSupply();
+    console.log('   Next Token ID:', currentNextId.toString());
+    console.log('   Total Supply:', totalSupply.toString());
+
     console.log('   ⏳ Minteando NFT...');
     
     // Obtener el próximo token ID del contrato
@@ -234,6 +239,30 @@ router.get('/stats', async (req, res) => {
     return res.status(500).json({
       success: false,
       error: 'Error al obtener estadísticas',
+      details: error.message
+    });
+  }
+});
+
+// ========== ENDPOINT: GET /api/next-token-id ==========
+router.get('/next-token-id', async (req, res) => {
+  try {
+    console.log('🔍 Consultando next token ID...');
+    
+    const nextTokenId = await contract.nextTokenId();
+    console.log(`   Next Token ID: ${nextTokenId.toString()}`);
+
+    return res.status(200).json({
+      success: true,
+      nextTokenId: nextTokenId.toString()
+    });
+
+  } catch (error) {
+    console.error('❌ Error obteniendo next token ID:', error.message);
+    
+    return res.status(500).json({
+      success: false,
+      error: 'Error al obtener next token ID',
       details: error.message
     });
   }

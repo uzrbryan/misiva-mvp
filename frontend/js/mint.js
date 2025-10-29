@@ -10,22 +10,28 @@ const API_URL = 'http://localhost:5000/api';
 /**
  * Obtener el próximo número de POAP para asignar wallet
  */
+// CAMBIAR la función getNextPOAPNumber():
 async function getNextPOAPNumber() {
   try {
-    const response = await fetch(`${API_URL}/stats`);
+    const response = await fetch(`${API_URL}/next-token-id`);
     const data = await response.json();
     
-    if (data.success && data.stats.length > 0) {
-      // Sumar todos los POAPs minteados
-      const totalPOAPs = data.stats.reduce((sum, stat) => sum + parseInt(stat.total_poaps), 0);
+    if (data.success) {
+      return parseInt(data.nextTokenId);
+    }
+    
+    // Fallback al método anterior si falla
+    const statsResponse = await fetch(`${API_URL}/stats`);
+    const statsData = await statsResponse.json();
+    
+    if (statsData.success && statsData.stats.length > 0) {
+      const totalPOAPs = statsData.stats.reduce((sum, stat) => sum + parseInt(stat.total_poaps), 0);
       return totalPOAPs + 1;
     }
     
-    // Si no hay stats, es el primer POAP
     return 1;
   } catch (error) {
-    console.error('Error obteniendo stats:', error);
-    // Si falla, usar timestamp como fallback
+    console.error('Error obteniendo next token ID:', error);
     return Math.floor(Date.now() / 1000) % 20 + 1;
   }
 }
