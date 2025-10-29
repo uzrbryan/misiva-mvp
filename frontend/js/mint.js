@@ -39,17 +39,30 @@ async function getNextPOAPNumber() {
 /**
  * Mintear un POAP
  * @param {string} userName - Nombre del usuario
+ * @param {string} customWallet - (Opcional) Wallet personalizada de MetaMask
  * @returns {Promise<object>} Resultado del mint
  */
-export async function mintPOAP(userName) {
+export async function mintPOAP(userName, customWallet = null) {
   try {
     // 1. Obtener el próximo número de POAP
     const nextPOAPNumber = await getNextPOAPNumber();
     console.log(`📊 Next POAP number: ${nextPOAPNumber}`);
     
-    // 2. Asignar wallet de forma rotativa
-    const wallet = getRotativeWallet(nextPOAPNumber);
-    console.log(`💼 Assigned wallet: ${wallet.label} (${wallet.address})`);
+    let wallet;
+    let walletLabel;
+    
+    // 2. Determinar qué wallet usar
+    if (customWallet) {
+      // Usar wallet personalizada de MetaMask
+      wallet = { address: customWallet };
+      walletLabel = 'MetaMask';
+      console.log(`🦊 Using MetaMask wallet: ${customWallet}`);
+    } else {
+      // Usar wallet rotativa (método original)
+      wallet = getRotativeWallet(nextPOAPNumber);
+      walletLabel = wallet.label;
+      console.log(`💼 Assigned wallet: ${wallet.label} (${wallet.address})`);
+    }
     
     // 3. Llamar al backend para mintear
     console.log('🔄 Calling backend...');
@@ -86,7 +99,7 @@ export async function mintPOAP(userName) {
       tokenId: data.data.tokenId,
       txHash: data.data.txHash,
       timestamp: data.data.timestamp,
-      walletLabel: wallet.label
+      walletLabel: walletLabel // Usar la variable correcta
     };
     
   } catch (error) {

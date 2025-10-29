@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Misiva</title>
     <link rel="stylesheet" href="css/main.css" />
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
   </head>
   <body>
     <header>
@@ -18,7 +26,6 @@
         </ul>
       </nav>
     </header>
-
     <main>
       <section class="hero" id="home">
         <div class="container">
@@ -28,16 +35,13 @@
             Intercambia tus tokens por valiosas recompensas y ayuda a construir
             un futuro sostenible.
           </p>
-
           <div class="exchange-icon">
             <div class="token-animation"></div>
           </div>
-
           <p class="cta-text">Comenzá Ahora</p>
           <!--<button class="cta-button">Comienza Ahora</button>-->
         </div>
       </section>
-
       <section class="process" id="process">
         <div class="container">
           <h2>Cómo funciona Misiva</h2>
@@ -107,7 +111,6 @@
           </div>
         </div>
       </section>
-
       <section class="dashboard" id="impact">
         <div class="container">
           <h2>Panel de impacto comunitario</h2>
@@ -129,7 +132,6 @@
               <p>Tokens distribuidos</p>
             </div>
           </div>
-
           <div class="leaderboard">
             <h3>🏆 Top Recicladores del Mes</h3>
             <div class="leader-item">
@@ -160,7 +162,6 @@
           </div>
         </div>
       </section>
-
       <section class="contact" id="contact">
         <div class="container">
           <h2>Contactanos</h2>
@@ -173,13 +174,11 @@
                 <strong>Direccion:</strong> 123 Calle Verde, Eco City, EC 12345
               </p>
               <p><strong>Horarios:</strong> Lun-Vie 8AM-6PM, Sab 9AM-4PM</p>
-
               <h3 style="margin-top: 2rem">Busca los puntos de Ecocanje</h3>
               <p>
                 Usa tu celular para localizar el Ecopunto mas cercano a tu area.
               </p>
             </div>
-
             <div class="contact-form">
               <h3>Mandanos un mensaje</h3>
               <form onsubmit="handleContactForm(event)">
@@ -210,7 +209,6 @@
           </div>
         </div>
       </section>
-
       <section class="cta-section" id="join">
         <div class="container">
           <h2>Queres hacer la diferencia?</h2>
@@ -222,21 +220,18 @@
             <button class="cta-button">Unite Hoy</button>
             <a href="#process" class="secondary-button">Saber Mas</a>
           </div>
-
           <div id="alert-container"></div>
         </div>
       </section>
     </main>
-
     <footer>
       <div class="container">
         <p>
-          &copy; 2025 Misiva. Transformando desechos en recompensas por un
-          mañana sustentable.
+          © 2025 Misiva. Transformando desechos en recompensas por un mañana
+          sustentable.
         </p>
       </div>
     </footer>
-
     <!-- ========== MODAL DE MINT ========== -->
     <div id="mint-modal">
       <div class="mint-modal-content">
@@ -686,15 +681,5 @@
         }
       })();
     </script>
-
-    <audio id="clickSound" preload="auto">
-      <source src="sounds/sound.mp3" type="audio/mpeg" />
-      <source src="sounds/sound.ogg" type="audio/ogg" />
-    </audio>
-
-    <div class="floating-particles" style="top: 15%; left: 10%"></div>
-    <div class="floating-particles" style="top: 25%; left: 85%"></div>
-    <div class="floating-particles" style="top: 45%; left: 15%"></div>
-    <div class="floating-particles" style="top: 65%; left: 90%"></div>
   </body>
 </html>
